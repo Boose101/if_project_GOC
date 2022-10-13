@@ -35,6 +35,16 @@ public class Gameofchance {
 
             money_choice = scan.nextInt();
 
+            if (money_choice != 1 || money_choice !=2 || money_choice != 3){
+                try{
+                    throw new OptionOutOfBoundsException("Option not possible");
+                }
+                
+                catch (IndexOutOfBoundsException e){
+                    System.out.println(e);
+                }
+            }
+
 
             scan.nextLine(); 
 
@@ -194,5 +204,11 @@ public class Gameofchance {
                 return false;
         }
         return true;
+    }
+    public class StudentNotFoundException extends Exception {
+ 
+        public StudentNotFoundException(String message) {
+            super(message);
+        }
     }
 }
