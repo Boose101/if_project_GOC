@@ -10,72 +10,31 @@ public class Gameofchance {
     private static String[] colors_act = {"red", "green", "blue", "yellow"};
 
     private static double money = 0;
-
-    
     public static void main(String[] args) {
         
         Scanner scan = new Scanner(System.in);
 
-        System.out.println("*****WELCOME*****");
-        System.out.println("You have $" + money + " in the bank");
-
-        start(scan);
-
-        
-
-
-
-
-        int user_roll = dice(scan);
-
-        int user_flip = coin_flip(scan);
-
-
-       int user_spin = spinner(scan);
-
-        System.out.println("You rolled a " + user_roll + "." + '\n' +
-            "You flipped an " + coin_options[user_flip] + "." + '\n' +
-            "You spun " + colors_act[user_spin] + ".");
-        
-
-
-        //Results section
-
-        if(allTrue(games)){
-            System.out.println("You managed to get everything correct");
-        }else if(allFalse(games)){
-            System.out.println("You manged to get everything wrong");
-        }else if(games[0]){
-            if(games[1]){
-                System.out.println("You got the " + game_names[0] + " and " + game_names[1] + " correct.");
-            }else{
-                System.out.println("You got the " + game_names[0] + " correct.");
-            }
-        }else if (games[1]){
-            if(games[2]){
-                System.out.println("You got the " + game_names[1] + " and " + game_names[2] + " correct.");
-            }else{
-                System.out.println("You got the " + game_names[1] + " correct.");
-            }
-        }else{
-            System.out.println("You got the " + game_names[2] + " correct.");
+        while(true){
+            start(scan);
         }
-
-        // ******
        
-        
-        scan.close();
     }
 
-    public static double start(Scanner scan){
-        int money_choice = 0;
-        while(money_choice != 2 || money_choice != 3){
+    public static void start(Scanner scan){
+        System.out.println("*****WELCOME*****");
+        
+        int money_choice = 1;
+        double bet = 0;
+        while(money_choice == 1){
+            System.out.println("You have $" + money + " in the bank");
+
             System.out.println("Please choose one of the following options:" + "\n" +
             "   (1) Deposit money into the bank " + "\n" +
             "   (2) Play the game!" + "\n" + 
             "   (3) Quit the game.");
 
             money_choice = scan.nextInt();
+
 
             scan.nextLine(); 
 
@@ -87,13 +46,57 @@ public class Gameofchance {
             }
         }
         if(money_choice == 2){
-            return betting(scan);
+            bet = betting(scan);
+            money -= bet;
         }else{
             System.exit(0);
-            
         }
-        return 0;
+        game(scan);
+        results(bet);
 
+    }
+
+    public static void game(Scanner scan){
+        int user_roll = dice(scan);
+
+        int user_flip = coin_flip(scan);
+
+
+       int user_spin = spinner(scan);
+
+        System.out.println("You rolled a " + user_roll + "." + '\n' +
+            "You flipped an " + coin_options[user_flip] + "." + '\n' +
+            "You spun " + colors_act[user_spin] + ".");
+
+        
+    }
+
+    public static void results(double bet){
+        if(allTrue(games)){
+            System.out.println("You managed to get everything correct");
+            money += bet*3;
+        }else if(allFalse(games)){
+            System.out.println("You manged to get everything wrong");
+        }else if(games[0]){
+            if(games[1]){
+                System.out.println("You got the " + game_names[0] + " and " + game_names[1] + " correct.");
+                money += bet*2;
+            }else{
+                System.out.println("You got the " + game_names[0] + " correct.");
+                money += bet;
+            }
+        }else if (games[1]){
+            if(games[2]){
+                System.out.println("You got the " + game_names[1] + " and " + game_names[2] + " correct.");
+                money += bet*2;
+            }else{
+                System.out.println("You got the " + game_names[1] + " correct.");
+                money += bet/4;
+            }
+        }else{
+            System.out.println("You got the " + game_names[2] + " correct.");
+            money += bet/2;
+        }
     }
 
     public static double betting(Scanner scan){
@@ -120,8 +123,6 @@ public class Gameofchance {
 
         int user_roll = scan.nextInt();
 
-        scan.nextLine();
-
         if(roll == user_roll){games[0]=true;}
         return roll;
     }
@@ -130,9 +131,6 @@ public class Gameofchance {
         System.out.println("What is your guess on the coin flip, Heads (H) or Tails (T)?");
 
         boolean ai_flip = random.nextBoolean(); //ai true = heads
-
-
-        scan.nextLine();
 
         String user_flip = scan.nextLine();
 
