@@ -1,4 +1,5 @@
 import java.util.Scanner;
+
 import java.util.Random;
 public class Gameofchance {
     private static boolean games [] = {false, false, false};
@@ -15,12 +16,16 @@ public class Gameofchance {
         Scanner scan = new Scanner(System.in);
 
         while(true){
-            start(scan);
+            try {
+                start(scan);
+            } catch (Gameofchance.OptionNotFoundException e) {
+                e.printStackTrace();
+            }
         }
        
     }
 
-    public static void start(Scanner scan){
+    public static void start(Scanner scan)throws OptionNotFoundException{
         System.out.println("*****WELCOME*****");
         
         int money_choice = 1;
@@ -37,10 +42,10 @@ public class Gameofchance {
 
             if (money_choice != 1 || money_choice !=2 || money_choice != 3){
                 try{
-                    throw new OptionOutOfBoundsException("Option not possible");
+                    throw new OptionNotFoundException("Option not possible");
                 }
                 
-                catch (IndexOutOfBoundsException e){
+                catch (OptionNotFoundException e){
                     System.out.println(e);
                 }
             }
@@ -205,10 +210,10 @@ public class Gameofchance {
         }
         return true;
     }
-    public class StudentNotFoundException extends Exception {
- 
-        public StudentNotFoundException(String message) {
-            super(message);
+    public static class OptionNotFoundException extends Exception {
+    
+            public OptionNotFoundException(String message) {
+                super(message);
+            }
         }
-    }
 }
