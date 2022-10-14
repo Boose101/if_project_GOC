@@ -23,9 +23,9 @@ public class Gameofchance {
     public static void start(Scanner scan){
         System.out.println("*****WELCOME*****");
         
-        int money_choice = 0;
+        int money_choice = 1;
         double bet = 0;
-        while(money_choice == 1 || money_choice == 0){
+        while(money_choice == 1){
             System.out.println("You have $" + money + " in the bank");
 
             System.out.println("Please choose one of the following options:" + "\n" +
@@ -51,8 +51,10 @@ public class Gameofchance {
         if(money_choice == 2){
             bet = betting(scan);
             money -= bet;
-        }else{
+        }else if(money_choice == 3){
             System.exit(0);
+        }else{
+            money_choice = 1;
         }
         game(scan);
         results(bet);
