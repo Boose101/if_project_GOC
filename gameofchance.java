@@ -18,14 +18,14 @@ public class Gameofchance {
         while(true){
             try {
                 start(scan);
-            } catch (Gameofchance.OptionNotFoundException e) {
+            } catch (Exceptions.OptionNotFoundException e) {
                 e.printStackTrace();
             }
         }
        
     }
 
-    public static void start(Scanner scan)throws OptionNotFoundException{
+    public static void start(Scanner scan)throws Exceptions.OptionNotFoundException{
         System.out.println("*****WELCOME*****");
         
         int money_choice = 1;
@@ -42,10 +42,10 @@ public class Gameofchance {
 
             if (money_choice != 1 || money_choice !=2 || money_choice != 3){
                 try{
-                    throw new OptionNotFoundException("Option not possible");
+                    throw new Exceptions.OptionNotFoundException("Option not possible. Broke game");
                 }
                 
-                catch (OptionNotFoundException e){
+                catch (Exceptions.OptionNotFoundException e){
                     System.out.println(e);
                 }
             }
@@ -210,10 +210,5 @@ public class Gameofchance {
         }
         return true;
     }
-    public static class OptionNotFoundException extends Exception {
     
-            public OptionNotFoundException(String message) {
-                super(message);
-            }
-        }
 }
