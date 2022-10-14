@@ -40,9 +40,10 @@ public class Gameofchance {
 
             money_choice = Integer.parseInt(scan.nextLine());
 
-            if (money_choice != 1 && money_choice !=2 && money_choice != 3){
+            if (money_choice != 1 || money_choice !=2 || money_choice != 3){
+                System.out.println(money_choice);
                 try{
-                    throw new Exceptions.OptionNotFoundException("Option not possible. Broke game");
+                    throw new Exceptions.OptionNotFoundException("Option not possible. You broke the game, be sad");
                 }
                 
                 catch (Exceptions.OptionNotFoundException e){
@@ -52,7 +53,7 @@ public class Gameofchance {
 
             else if(money_choice == 1){
                 System.out.println("How much would you like to deposit?");
-                double deposit = scan.nextDouble();
+                double deposit = Double.parseDouble(scan.nextLine());
                 
                 money += deposit;
             }
@@ -113,7 +114,7 @@ public class Gameofchance {
 
     public static double betting(Scanner scan){
         System.out.println("How much would you like to bet?");
-        double bet = scan.nextDouble();
+        double bet = Double.parseDouble(scan.nextLine());
 
         boolean clerance = false;
 
