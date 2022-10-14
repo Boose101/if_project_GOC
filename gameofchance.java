@@ -38,9 +38,9 @@ public class Gameofchance {
             "   (2) Play the game!" + "\n" + 
             "   (3) Quit the game.");
 
-            money_choice = scan.nextInt();
+            money_choice = Integer.parseInt(scan.nextLine());
 
-            if (money_choice != 1 || money_choice !=2 || money_choice != 3){
+            if (money_choice != 1 && money_choice !=2 && money_choice != 3){
                 try{
                     throw new Exceptions.OptionNotFoundException("Option not possible. Broke game");
                 }
@@ -50,10 +50,7 @@ public class Gameofchance {
                 }
             }
 
-
-            scan.nextLine(); 
-
-            if(money_choice == 1){
+            else if(money_choice == 1){
                 System.out.println("How much would you like to deposit?");
                 double deposit = scan.nextDouble();
                 
@@ -136,7 +133,7 @@ public class Gameofchance {
 
         int roll = random.nextInt(6)+1;
 
-        int user_roll = scan.nextInt();
+        int user_roll = Integer.parseInt(scan.nextLine());
 
         if(roll == user_roll){games[0]=true;}
         return roll;
