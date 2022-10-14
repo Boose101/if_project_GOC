@@ -23,9 +23,9 @@ public class Gameofchance {
     public static void start(Scanner scan){
         System.out.println("*****WELCOME*****");
         
-        int money_choice = 1;
+        int money_choice = 0;
         double bet = 0;
-        while(money_choice == 1){
+        while(money_choice == 1 || money_choice == 0){
             System.out.println("You have $" + money + " in the bank");
 
             System.out.println("Please choose one of the following options:" + "\n" +
@@ -33,14 +33,17 @@ public class Gameofchance {
             "   (2) Play the game!" + "\n" + 
             "   (3) Quit the game.");
 
-            money_choice = scan.nextInt();
+            
+            money_choice = Integer.parseInt(scan.nextLine());
+            
+            
 
 
-            scan.nextLine(); 
+
 
             if(money_choice == 1){
                 System.out.println("How much would you like to deposit?");
-                double deposit = scan.nextDouble();
+                double deposit = Double.parseDouble(scan.nextLine());
                 
                 money += deposit;
             }
@@ -101,7 +104,7 @@ public class Gameofchance {
 
     public static double betting(Scanner scan){
         System.out.println("How much would you like to bet?");
-        double bet = scan.nextDouble();
+        double bet = Double.parseDouble(scan.nextLine());
 
         boolean clerance = false;
 
@@ -121,7 +124,7 @@ public class Gameofchance {
 
         int roll = random.nextInt(6)+1;
 
-        int user_roll = scan.nextInt();
+        int user_roll = Integer.parseInt(scan.nextLine());
 
         if(roll == user_roll){games[0]=true;}
         return roll;
